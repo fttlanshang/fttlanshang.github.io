@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数组的常见操作（1） - fttlanshang 声色犬马</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文主要模拟实现forEach/map/reduce/filter高阶函数，主要参考了《JavaScript编程精解》(Eloquent JavaScript)这本书。假设数据如下：12345678var aqiData = [  [&amp;quot;北京&amp;quot;, 90],  [&amp;quot;上海&amp;quot;, 50],  [&amp;quot;福州&amp;quot;, 10],  [&amp;quot;广州&amp;quot;">
+<meta name="keywords" content="array">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组的常见操作（1）">
+<meta property="og:url" content="https://fttlanshang.github.io/2017/07/04/common-methods-of-array-1/index.html">
+<meta property="og:site_name" content="fttlanshang 声色犬马">
+<meta property="og:description" content="本文主要模拟实现forEach/map/reduce/filter高阶函数，主要参考了《JavaScript编程精解》(Eloquent JavaScript)这本书。假设数据如下：12345678var aqiData = [  [&amp;quot;北京&amp;quot;, 90],  [&amp;quot;上海&amp;quot;, 50],  [&amp;quot;福州&amp;quot;, 10],  [&amp;quot;广州&amp;quot;">
+<meta property="og:updated_time" content="2017-07-04T13:43:00.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数组的常见操作（1）">
+<meta name="twitter:description" content="本文主要模拟实现forEach/map/reduce/filter高阶函数，主要参考了《JavaScript编程精解》(Eloquent JavaScript)这本书。假设数据如下：12345678var aqiData = [  [&amp;quot;北京&amp;quot;, 90],  [&amp;quot;上海&amp;quot;, 50],  [&amp;quot;福州&amp;quot;, 10],  [&amp;quot;广州&amp;quot;">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fttlanshang.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-common-methods-of-array-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数组的常见操作（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/07/04/common-methods-of-array-1/" class="article-date">
+  <time datetime="2017-07-04T13:42:02.000Z" itemprop="datePublished">2017-07-04</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要模拟实现forEach/map/reduce/filter高阶函数，主要参考了《JavaScript编程精解》(Eloquent JavaScript)这本书。<br>假设数据如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var aqiData = [</div><div class="line">  [&quot;北京&quot;, 90],</div><div class="line">  [&quot;上海&quot;, 50],</div><div class="line">  [&quot;福州&quot;, 10],</div><div class="line">  [&quot;广州&quot;, 50],</div><div class="line">  [&quot;成都&quot;, 90],</div><div class="line">  [&quot;西安&quot;, 100]</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>forEach</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Array.prototype.forEach2 = function(fn) &#123;</div><div class="line">    for(var i = 0; i &lt; this.length; i++) &#123;</div><div class="line">        fn(this[i]);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">aqiData.forEach2(function(aqi) &#123;</div><div class="line">    console.log(aqi);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>map：对数组中的每个元素调用函数，然后利用返回值构建一个新的数组，实现数组的转换，相当于一种映射。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Array.prototype.map2 = function(fn) &#123;</div><div class="line">    var mapped = [];</div><div class="line">    this.forEach(function(item) &#123;</div><div class="line">        mapped.push(fn(item));</div><div class="line">    &#125;);</div><div class="line">    return mapped;</div><div class="line">&#125;;</div><div class="line">aqiData.map2(function(aqi) &#123;</div><div class="line">    return aqi[0];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>filter：对数组元素进行过滤。该方法并没有在原来的数组上进行直接修改，而是新建了一个数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Array.prototype.filter2 = function(fn) &#123;</div><div class="line">    var passed = [];</div><div class="line">    this.forEach(function(item) &#123;</div><div class="line">        if(fn(item))    passed.push(item);</div><div class="line">    &#125;);</div><div class="line">    return passed;</div><div class="line">&#125;</div><div class="line">aqiData.filter2(function(aqi) &#123;</div><div class="line">    return aqi[1] &gt; 60;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>reduce：折叠数组的操作，比如求和、寻找最值等。注意：该实现没有考虑initialValue，即<code>start</code>可不给定，实际上，当initialValue不指定时，将使用数组的第一个元素作为初始值，从第二个元素开始执行合并操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.reduce2 = function(fn, start) &#123;</div><div class="line">    var total = start;</div><div class="line">    this.forEach(function(item) &#123;</div><div class="line">        total = fn(total, item);</div><div class="line">    &#125;);</div><div class="line">    return total;</div><div class="line">&#125;;</div><div class="line">aqiData.reduce2(function(current, aqi)&#123;</div><div class="line">    return current + aqi[1];</div><div class="line">&#125;, 0);</div><div class="line">var flattened = [[0, 1], [2, 3], [4, 5]].reduce2(function(a, b) &#123;</div><div class="line">  return a.concat(b);</div><div class="line">&#125;, []); // mdn上的例子</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>实际上，标准的forEach/map/filter/reduce除了接受element value外，还有另外两个参数，一个是index，另一个是被遍历的数组。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/04/DOM-文本相关/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">与文本相关的DOM&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 fttlanshang&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
