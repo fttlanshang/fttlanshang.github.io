@@ -51,6 +51,78 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-DOM-文本相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/04/DOM-文本相关/">与文本相关的DOM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/07/04/DOM-文本相关/" class="article-date">
+  <time datetime="2017-07-04T09:15:25.207Z" itemprop="datePublished">2017-07-04</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总是value、data、innerHTML、textContent等傻傻分不清，遇到jQuery，选项再次增多，所以在此总结一下，等以后糊涂的时候，可以回来查阅。</p>
+<h3 id="原生JavaScript"><a href="#原生JavaScript" class="headerlink" title="原生JavaScript"></a>原生JavaScript</h3><ol>
+<li>textContent：获取文本形式，是后代节点上值的总和</li>
+<li>innerText: IE introduced <code>node.innnerText</code>，但并不是只有IE可以用。</li>
+<li>nodeValue<ul>
+<li>元素节点上不存data，nodeValue为null</li>
+<li>在文本节点上，nodeValue为data</li>
+</ul>
+</li>
+<li>innerHTML：返回HTML形式的结果</li>
+<li>outerHTML：与innerHTML相对应</li>
+<li>value：针对表单元素，主要是<code>input</code>和<code>textarea</code>？</li>
+<li>data：文本节点的值，使用时要首先获取文本节点，如果对于<code>&lt;span id=&quot;test&quot;&gt;This is ...&lt;/span&gt;</code>而言，可以通过<code>document.getElementsById(&#39;test&#39;).firseChild.data</code>或者<code>document.getElementsById(&#39;test&#39;).childern[0].data</code>。</li>
+</ol>
+<p>假设有这样一个HTML片段，<code>&lt;div id=&quot;divA&quot;&gt;This is &lt;span&gt;some&lt;/span&gt; text&lt;/div&gt;</code>，在我电脑的IE 11、chrome和firefox上结果一样，具体如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var divA = document.getElementById(&apos;divA&apos;);</div><div class="line">console.log(divA.textContent); //This is some text</div><div class="line">console.log(divA.innerHTML);// This is &lt;span&gt;some&lt;/span&gt; text</div><div class="line">console.log(divA.outerHTML);//&lt;div id=&quot;divA&quot;&gt;This is &lt;span&gt;some&lt;/span&gt; text&lt;/div&gt;</div><div class="line">console.log(divA.nodeValue);//null</div><div class="line">console.log(divA.firstChild.nodeValue); // This is</div><div class="line">console.log(divA.innerText);// This is some text</div><div class="line">console.log(divA.value);// undefined</div><div class="line">console.log(divA.data);//undefined</div><div class="line">console.log(divA.firstChild.data); // This is</div></pre></td></tr></table></figure></p>
+<p>个人而言，选择使用textContent/innerHTML/value<br>看到一篇<a href="https://jsperf.com/read-innerhtml-vs-innertext-vs-nodevalue-vs-textcontent/13" target="_blank" rel="external">关于速度的文章</a>，结果是nodeValue &gt; textContent &gt; innerHTML &gt; innerText.</p>
+<h3 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h3><ol>
+<li>html()</li>
+<li>val()：适用于表单元素</li>
+<li>text()：文本<br>无参数时为获取，有参数时为设置</li>
+</ol>
+<p>参考：</p>
+<ul>
+<li><a href="http://ife.baidu.com/note/detail/id/635" target="_blank" rel="external">http://ife.baidu.com/note/detail/id/635</a></li>
+<li><a href="https://www.web-tinker.com/article/21244.html" target="_blank" rel="external">https://www.web-tinker.com/article/21244.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-第一次面试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
