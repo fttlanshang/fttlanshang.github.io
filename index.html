@@ -51,6 +51,79 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-common-methods-of-array-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/04/common-methods-of-array-2/">数组的常见操作（2）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/07/04/common-methods-of-array-2/" class="article-date">
+  <time datetime="2017-07-04T13:55:21.000Z" itemprop="datePublished">2017-07-04</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇主要介绍数组的其他常见方法，主要从是否对数组发生改动的角度进行分析。mdn上将数组的方法分为mutator methods/accessor methods/itration methods。itration methods在上一篇中有简要介绍，这一篇主要介绍前两种。</p>
+<h3 id="mutator-methods，对数组进行修改"><a href="#mutator-methods，对数组进行修改" class="headerlink" title="mutator methods，对数组进行修改:"></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Mutator_methods" target="_blank" rel="external">mutator methods</a>，对数组进行修改:</h3><ul>
+<li>push/pop/shift/unshift</li>
+<li>splice：该方法需要特别注意！既可以向数组中添加元素，也可删除元素。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">array.splice(start); // 从start往后的元素都会被删除</div><div class="line">array.splice(start, deleteCount);</div><div class="line">array.splice(start, deleteCount, item1, item2, ...) //插入与删除元素的起始位置都是start</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var baskets = [&apos;milk&apos;, &apos;bread&apos;, &apos;notebooks&apos;, &apos;pencil&apos;, &apos;carrots&apos;];</div><div class="line">var removed = baskets.splice(2, 1);</div><div class="line"></div><div class="line">// baskets is  [&apos;milk&apos;, &apos;bread&apos;, &apos;pencil&apos;, &apos;carrots&apos;]</div><div class="line">//removed is [&apos;notebooks&apos;]</div></pre></td></tr></table></figure></p>
+<ul>
+<li>reverse</li>
+<li>sort<br>此外，还包括copyWithin、fill，我第一次见到这两种方法</li>
+</ul>
+<h3 id="常用的Accessor-methods，不对数组进行修改"><a href="#常用的Accessor-methods，不对数组进行修改" class="headerlink" title="常用的Accessor methods，不对数组进行修改"></a>常用的<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Accessor_methods" target="_blank" rel="external">Accessor methods</a>，不对数组进行修改</h3><ul>
+<li><p>concat，对数组进行合并</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var nums = [2, 9, 20, 3, 4];</div><div class="line">nums.concat([7, 11]); //return an new array, [2, 9, 20, 3, 4, 7, 11]</div><div class="line">console.log(nums); // still [2, 9, 20, 3, 4]</div></pre></td></tr></table></figure>
+</li>
+<li><p>indexOf/lastIndexOf</p>
+</li>
+<li>join：Joins all elements of an array into a string.</li>
+<li>slice：shallow copy<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">array.slice(); // 返回整个数组</div><div class="line">array.slice(start);</div><div class="line">array.slice(start, end); // 不包括end</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>举例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var nums = [2, 9, 20, 3, 4];</div><div class="line">var newNums = nums.slice(1, 3);  // newNums is [9, 20];</div></pre></td></tr></table></figure></p>
+<p>slice方法还经常用于将类数组的对象或集合转为新数组，比如<code>Array.prototype.slice.call(arguments)</code></p>
+<ul>
+<li>上一篇中提及的forEach/filter/map/reduce均不对数组进行修改</li>
+</ul>
+<p>slice/splice方法有时会弄混，至于它们的参数的具体情况（负数等），使用时再查阅文档吧。<br>在JavaScript中，strings和numbers都是immutable的。最近才看到mutable vs immutable，所以对其应用性等还不熟悉。等以后深入了解后再细谈。<br>&lt; <a href="https://www.sitepoint.com/immutability-javascript/" target="_blank" rel="external">https://www.sitepoint.com/immutability-javascript/</a><br>&lt; <a href="https://vincent.billey.me/pure-javascript-immutable-array/" target="_blank" rel="external">https://vincent.billey.me/pure-javascript-immutable-array/</a></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-common-methods-of-array-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
