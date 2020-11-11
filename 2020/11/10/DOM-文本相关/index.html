@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>与文本相关的DOM - fttlanshang 声色犬马</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="总是value、data、innerHTML、textContent等傻傻分不清，遇到jQuery，选项再次增多，所以在此总结一下，等以后糊涂的时候，可以回来查阅。 原生JavaScript textContent：获取文本形式，是后代节点上值的总和 innerText: IE introduced node.innnerText，但并不是只有IE可以用。 nodeValue 元素节点上不存dat">
+<meta name="keywords" content="DOM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="与文本相关的DOM">
+<meta property="og:url" content="https://fttlanshang.github.io/2020/11/10/DOM-文本相关/index.html">
+<meta property="og:site_name" content="fttlanshang 声色犬马">
+<meta property="og:description" content="总是value、data、innerHTML、textContent等傻傻分不清，遇到jQuery，选项再次增多，所以在此总结一下，等以后糊涂的时候，可以回来查阅。 原生JavaScript textContent：获取文本形式，是后代节点上值的总和 innerText: IE introduced node.innnerText，但并不是只有IE可以用。 nodeValue 元素节点上不存dat">
+<meta property="og:updated_time" content="2017-07-04T09:57:27.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="与文本相关的DOM">
+<meta name="twitter:description" content="总是value、data、innerHTML、textContent等傻傻分不清，遇到jQuery，选项再次增多，所以在此总结一下，等以后糊涂的时候，可以回来查阅。 原生JavaScript textContent：获取文本形式，是后代节点上值的总和 innerText: IE introduced node.innnerText，但并不是只有IE可以用。 nodeValue 元素节点上不存dat">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://fttlanshang.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-DOM-文本相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      与文本相关的DOM
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2020/11/10/DOM-文本相关/" class="article-date">
+  <time datetime="2020-11-11T02:58:13.504Z" itemprop="datePublished">2020-11-10</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总是value、data、innerHTML、textContent等傻傻分不清，遇到jQuery，选项再次增多，所以在此总结一下，等以后糊涂的时候，可以回来查阅。</p>
+<h3 id="原生JavaScript"><a href="#原生JavaScript" class="headerlink" title="原生JavaScript"></a>原生JavaScript</h3><ol>
+<li>textContent：获取文本形式，是后代节点上值的总和</li>
+<li>innerText: IE introduced <code>node.innnerText</code>，但并不是只有IE可以用。</li>
+<li>nodeValue<ul>
+<li>元素节点上不存data，nodeValue为null</li>
+<li>在文本节点上，nodeValue为data</li>
+</ul>
+</li>
+<li>innerHTML：返回HTML形式的结果</li>
+<li>outerHTML：与innerHTML相对应</li>
+<li>value：针对表单元素，主要是<code>input</code>和<code>textarea</code>？</li>
+<li>data：文本节点的值，使用时要首先获取文本节点，如果对于<code>&lt;span id=&quot;test&quot;&gt;This is ...&lt;/span&gt;</code>而言，可以通过<code>document.getElementsById(&#39;test&#39;).firseChild.data</code>或者<code>document.getElementsById(&#39;test&#39;).childern[0].data</code>。</li>
+</ol>
+<p>假设有这样一个HTML片段，<code>&lt;div id=&quot;divA&quot;&gt;This is &lt;span&gt;some&lt;/span&gt; text&lt;/div&gt;</code>，在我电脑的IE 11、chrome和firefox上结果一样，具体如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var divA = document.getElementById(&apos;divA&apos;);</div><div class="line">console.log(divA.textContent); //This is some text</div><div class="line">console.log(divA.innerHTML);// This is &lt;span&gt;some&lt;/span&gt; text</div><div class="line">console.log(divA.outerHTML);//&lt;div id=&quot;divA&quot;&gt;This is &lt;span&gt;some&lt;/span&gt; text&lt;/div&gt;</div><div class="line">console.log(divA.nodeValue);//null</div><div class="line">console.log(divA.firstChild.nodeValue); // This is</div><div class="line">console.log(divA.innerText);// This is some text</div><div class="line">console.log(divA.value);// undefined</div><div class="line">console.log(divA.data);//undefined</div><div class="line">console.log(divA.firstChild.data); // This is</div></pre></td></tr></table></figure></p>
+<p>个人而言，选择使用textContent/innerHTML/value<br>看到一篇<a href="https://jsperf.com/read-innerhtml-vs-innertext-vs-nodevalue-vs-textcontent/13" target="_blank" rel="external">关于速度的文章</a>，结果是nodeValue &gt; textContent &gt; innerHTML &gt; innerText.</p>
+<h3 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h3><ol>
+<li>html()</li>
+<li>val()：适用于表单元素</li>
+<li>text()：文本<br>无参数时为获取，有参数时为设置</li>
+</ol>
+<p>参考：</p>
+<ul>
+<li><a href="http://ife.baidu.com/note/detail/id/635" target="_blank" rel="external">http://ife.baidu.com/note/detail/id/635</a></li>
+<li><a href="https://www.web-tinker.com/article/21244.html" target="_blank" rel="external">https://www.web-tinker.com/article/21244.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/10/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Hello fttlanshang
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/04/common-methods-of-array-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数组的常见操作（2）&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 fttlanshang&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
