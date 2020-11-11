@@ -6,7 +6,7 @@
   <title>2020 Loved Podcasts Summary - fttlanshang 声色犬马</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="This is a placeholder. Will try to fill the content before the year ends.">
-<meta name="keywords" content="2020,summary,podcast">
+<meta name="keywords" content="podcast,2020,summary">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2020 Loved Podcasts Summary">
 <meta property="og:url" content="https://fttlanshang.github.io/2020/11/10/2020-Podcasts/index.html">
@@ -134,24 +134,22 @@
 
 
 
-<div id="gitment"></div>
 
-<!-- 主页不要加载gitment -->
-
+    <div id="gitment-comments"></div>    
 
 <script>
-var gitment = new Gitment({
-  owner: 'fttlanshang',
-  repo: 'https://github.com/fttlanshang/comment_for_blog  ',
-  oauth: {
-    client_id: 'Iv1.482d6e7f8c5142ca',
-    client_secret: 'b2dfbecfb055b32b6ccda0cc33858da0a4a9de22',
-  },
-})
-gitment.render('gitment')
-</script>
- 
+const gitment = new Gitment({
+    id: '2020 Loved Podcasts Summary',
+    owner: 'fttlanshang',
+    repo: ''https://github.com/fttlanshang/comment_for_blog'',
+    oauth: {
+        client_id: 'Iv1.482d6e7f8c5142ca',
+        client_secret: 'undefined'
+    }
+});
 
+gitment.render(document.getElementById('gitment-comments'));
+</script>
 
 
 
