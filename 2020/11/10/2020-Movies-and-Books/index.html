@@ -149,8 +149,23 @@
 <div class="comments">
     <h3 class="title is-4">Kommentare</h3>
     
-</div>
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+	var gitment = new Gitment({
+		id: '2020/11/10/2020-Movies-and-Books/',
+		owner: 'fttlanshang',
+		repo: 'comment_for_blog',
+		oauth: {
+			client_id: '165b31f47ce02ab79644',
+			client_secret: 'e25a06470fd2c6c2bd57794c1d964475c099801b',
+		},
+	})
+	gitment.render('comment-container')
+</script>
 
+</div>
 
     </div>
 </section>
