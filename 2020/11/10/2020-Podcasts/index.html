@@ -29,8 +29,8 @@
 
 <body>
   <div id="container">
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <header id="header">
   <div id="header-outer" class="outer">
     <div id="header-inner" class="inner">
@@ -134,24 +134,25 @@
 
 
 
-<div id="gitment"></div>
+<div id="gitalk-container"></div>
 
 <!-- 主页不要加载gitment -->
 
 
-<script>
-const gitment = new Gitment({
-	owner: 'fttlanshang',
-	repo: ''comment_for_blog'',
-	oauth: {
-	client_id: 'Iv1.482d6e7f8c5142ca',
-	client_secret: 'b2dfbecfb055b32b6ccda0cc33858da0a4a9de22'
-	}
-});
+const gitalk = new Gitalk({
+  clientID: 'Iv1.482d6e7f8c5142ca',
+  clientSecret: 'undefined',
+  repo: 'comment_for_blog',      // The repository of store comments,
+  owner: 'fttlanshang',
+  admin: ['fttlanshang'],
+  id: location.pathname,      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
+})
 
-gitment.render('gitment')
+gitalk.render('gitalk-container')
 </script>
  
+
 
 
 
