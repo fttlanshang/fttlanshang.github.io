@@ -146,7 +146,7 @@ const gitalk = new Gitalk({
   repo: 'comment_for_blog',      // The repository of store comments,
   owner: 'fttlanshang',
   admin: ['fttlanshang'],
-  id: '',
+  id: md5(location.pathname),
   distractionFreeMode: false  // Facebook-like distraction free mode
 })
 
