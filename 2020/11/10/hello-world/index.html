@@ -136,28 +136,30 @@
 
 
 
+<div id="gitment"></div>
 
-    <div id="gitment-comments"></div>    
-
-
-
-
-
+<!-- 主页不要加载gitment -->
 
 
 <script>
-const gitment = new Gitment({
-    id: '',
-    owner: 'fttlanshang',
-    repo: ''https://github.com/fttlanshang/comment_for_blog'',
-    oauth: {
-        client_id: 'Iv1.482d6e7f8c5142ca',
-        client_secret: 'undefined'
-    }
-});
+var gitment = new Gitment({
+  owner: 'fttlanshang',
+  repo: 'https://github.com/fttlanshang/comment_for_blog  ',
+  oauth: {
+    client_id: 'Iv1.482d6e7f8c5142ca',
+    client_secret: 'b2dfbecfb055b32b6ccda0cc33858da0a4a9de22',
+  },
+})
+gitment.render('gitment')
+</script>
+ 
 
-gitment.render(document.getElementById('gitment-comments'));
-</script></section>
+
+
+
+
+
+</section>
     <footer id="footer">
   
   <div class="outer">
